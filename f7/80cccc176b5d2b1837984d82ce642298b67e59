@@ -1,0 +1,25 @@
+internal/commands/datasets/columns.go
+  s_f419e24bfa7567::t_a8ffe38153fa63 1-99
+internal/commands/datasets/create.go
+  s_f419e24bfa7567::t_2b1c7d4e52b770 1-63
+internal/commands/datasets/datasets_test.go
+  s_f419e24bfa7567::t_b4d3e1f37dc531 5,172-280
+internal/commands/datasets/update.go
+  s_f419e24bfa7567::t_486853eeea0d83 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f780cccc176b5d2b1837984d82ce642298b67e59",
+  "prompts": {},
+  "sessions": {
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
