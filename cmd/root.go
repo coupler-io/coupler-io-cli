@@ -16,6 +16,7 @@ import (
 	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/configure"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/dataflows"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/datasets"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/workspaces"
 	"github.com/coupler-io/coupler-io-cli/internal/config"
 	"github.com/coupler-io/coupler-io-cli/internal/output"
@@ -77,6 +78,9 @@ Get started:
 
 	// Dataflows
 	cmd.AddCommand(dataflows.NewCmdDataflows(f))
+
+	// Data
+	cmd.AddCommand(datasets.NewCmdDatasets(f))
 
 	cmd.AddCommand(newCompletionCmd())
 
