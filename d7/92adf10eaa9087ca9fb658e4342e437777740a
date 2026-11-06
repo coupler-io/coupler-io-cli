@@ -1,0 +1,31 @@
+README.md
+  s_f0a3efced18120::t_5bf4527b53c259 27,30-32,39,44-50,111-124
+  s_f0a3efced18120::t_5717648fbfb121 136
+  h_5a7459c565b0c6 3,5-26,28-29,34-38,40-42,51-109,129-135,137-144,146-153
+  s_f0a3efced18120::t_31b8083ac4eee8 33,43,110
+.goreleaser.yml
+  h_5a7459c565b0c6 1-42
+.github/workflows/release.yml
+  h_5a7459c565b0c6 1-31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d792adf10eaa9087ca9fb658e4342e437777740a",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
