@@ -1,0 +1,18 @@
+.github/workflows/release.yml
+  h_5a7459c565b0c6 1-31
+.goreleaser.yml
+  h_5a7459c565b0c6 1-42
+README.md
+  h_5a7459c565b0c6 3,5-102,107-113,115-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "67032e34d612478c16ada7a1a06dcbf9e0148c53",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
