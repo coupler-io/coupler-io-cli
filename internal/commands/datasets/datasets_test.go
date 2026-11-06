@@ -2,6 +2,7 @@ package datasets_test
 
 import (
 	"net/http"
+	"reflect"
 	"strings"
 	"testing"
 
@@ -165,6 +166,115 @@ func TestQueryTimeoutSurfaces(t *testing.T) {
 	err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "query", "ds-1", "-s", "select 1")
 	if err == nil || !strings.Contains(err.Error(), "504") || !strings.Contains(err.Error(), "Query timed out") {
 		t.Fatalf("got %v", err)
+	}
+}
+
+func TestCreateCustomSQL(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost || r.URL.Path != "/v1/workspaces/42/dataflows/df-1/datasets" {
+			t.Errorf("unexpected request %s %s", r.Method, r.URL.Path)
+		}
+		want := map[string]interface{}{"type": "customSql", "query": `select * from "t"`, "name": "Summary"}
+		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, want) {
+			t.Errorf("body = %v", body)
+		}
+		cmdtest.JSON(w, 201, map[string]interface{}{"id": "ds-2", "name": "Summary"})
+	})
+
+	err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "create", "--dataflow-id", "df-1",
+		"--name", "Summary", "--query", `select * from "t"`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(env.Out.String(), "ds-2") {
+		t.Errorf("unexpected output:\n%s", env.Out.String())
+	}
+}
+
+func TestUpdateClearsWithNull(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPatch || r.URL.Path != "/v1/workspaces/42/datasets/ds-1" {
+			t.Errorf("unexpected request %s %s", r.Method, r.URL.Path)
+		}
+		want := map[string]interface{}{"name": "New", "ai_context": nil}
+		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, want) {
+			t.Errorf("body = %v", body)
+		}
+		cmdtest.JSON(w, 200, map[string]interface{}{"id": "ds-1", "name": "New"})
+	})
+
+	if err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "update", "ds-1", "--name", "New", "--ai-context", ""); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateQuerySetsCustomSQLType(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		want := map[string]interface{}{"type": "customSql", "query": "select 1"}
+		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, want) {
+			t.Errorf("body = %v", body)
+		}
+		cmdtest.JSON(w, 200, map[string]interface{}{"id": "ds-1"})
+	})
+
+	if err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "update", "ds-1", "--query", "select 1"); err != nil {
+		t.Fatal(err)
+	}
+
+	err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "update", "ds-1")
+	if err == nil || !strings.Contains(err.Error(), "nothing to update") {
+		t.Fatalf("got %v", err)
+	}
+}
+
+func TestColumnsUpdateSingle(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPatch || r.URL.Path != "/v1/workspaces/42/datasets/ds-1/columns" {
+			t.Errorf("unexpected request %s %s", r.Method, r.URL.Path)
+		}
+		want := map[string]interface{}{"column_updates": []interface{}{
+			map[string]interface{}{"key": "revenue", "label": "Revenue", "description": nil},
+		}}
+		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, want) {
+			t.Errorf("body = %v", body)
+		}
+		cmdtest.JSON(w, 200, map[string]interface{}{"id": "ds-1", "updated_column_keys": []string{"revenue"}})
+	})
+
+	err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "columns", "update", "ds-1",
+		"--key", "revenue", "--label", "Revenue", "--description", "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(env.Out.String(), "revenue") {
+		t.Errorf("unexpected output:\n%s", env.Out.String())
+	}
+}
+
+func TestColumnsUpdateBulkAndValidation(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		body := cmdtest.DecodeBody(t, r)
+		if updates, _ := body["column_updates"].([]interface{}); len(updates) != 2 {
+			t.Errorf("body = %v", body)
+		}
+		cmdtest.JSON(w, 200, map[string]interface{}{"id": "ds-1", "updated_column_keys": []string{"a", "b"}})
+	})
+
+	err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), "columns", "update", "ds-1",
+		"--updates", `[{"key":"a","label":"A"},{"key":"b","description":"B"}]`)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	for name, args := range map[string][]string{
+		"no input":     {"columns", "update", "ds-1"},
+		"key only":     {"columns", "update", "ds-1", "--key", "a"},
+		"mixed inputs": {"columns", "update", "ds-1", "--key", "a", "--label", "A", "--updates", "[]"},
+		"bad json":     {"columns", "update", "ds-1", "--updates", "{"},
+	} {
+		if err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), args...); err == nil {
+			t.Errorf("%s: expected error", name)
+		}
 	}
 }
 

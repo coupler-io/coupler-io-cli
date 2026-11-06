@@ -57,7 +57,10 @@ func NewCmdDatasets(f *cmdutil.Factory) *cobra.Command {
 
 	cmd.AddCommand(newCmdList(f))
 	cmd.AddCommand(newCmdGet(f))
+	cmd.AddCommand(newCmdCreate(f))
+	cmd.AddCommand(newCmdUpdate(f))
 	cmd.AddCommand(newCmdQuery(f))
+	cmd.AddCommand(newCmdColumns(f))
 	cmd.AddCommand(newCmdSnapshots(f))
 
 	return cmd
