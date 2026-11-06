@@ -1,0 +1,85 @@
+.github/workflows/ci.yml
+  s_f0a3efced18120::t_87e2a5af5944bd 1-26
+.gitignore
+  s_f0a3efced18120::t_761d22505746c8 1-8
+Makefile
+  s_f0a3efced18120::t_32230ace163420 1-24
+README.md
+  s_f0a3efced18120::t_5717648fbfb121 1-13
+cmd/exit_test.go
+  s_f419e24bfa7567::t_24045e9494ff82 1-49
+cmd/signal_unix_test.go
+  s_f419e24bfa7567::t_e6d298f3d40245 1-33
+go.mod
+  s_f0a3efced18120::t_69757a18b086f8 1-24
+go.sum
+  s_f0a3efced18120::t_8c4669f8e5d103 1-54
+internal/client/client.go
+  s_f0a3efced18120::t_42ebd74e094254 1-129
+internal/client/client_test.go
+  s_f0a3efced18120::t_96c5dfa2b1e70c 1-125
+internal/client/errors.go
+  s_f0a3efced18120::t_22a33b00b8b8a9 1-77
+internal/cmdtest/cmdtest.go
+  s_f419e24bfa7567::t_f5d4c4e84a09c0 1-80
+internal/cmdutil/args.go
+  s_f0a3efced18120::t_310ebe1f6b904a 1-72
+internal/cmdutil/args_test.go
+  s_f0a3efced18120::t_a2f6d9b337534f 1-66
+internal/cmdutil/detail.go
+  s_f0a3efced18120::t_0488156005cb3a 1-71
+internal/cmdutil/errors.go
+  s_f0a3efced18120::t_fe7cfc6c3a8255 1-54
+internal/cmdutil/errors_test.go
+  s_f0a3efced18120::t_6ea26bd98b1bb3 1-55
+internal/cmdutil/factory.go
+  s_f0a3efced18120::t_6d69ced4605ba6 1-69
+internal/cmdutil/paths.go
+  s_f0a3efced18120::t_1d5677c3eb9b71 1-28
+internal/cmdutil/print.go
+  s_f0a3efced18120::t_3fe6063141da5a 1-43
+internal/config/config.go
+  s_f0a3efced18120::t_52d6b784ee6933 1-73
+internal/config/config_test.go
+  s_f419e24bfa7567::t_843957d536cf03 1-101
+internal/output/csv.go
+  s_f0a3efced18120::t_caa3a4cf83476c 1-39
+internal/output/formatter.go
+  s_f0a3efced18120::t_ae1ca4b90e2866 1-154
+internal/output/json.go
+  s_f0a3efced18120::t_4105c60043b431 1-15
+internal/output/list.go
+  s_f0a3efced18120::t_b6495c3e6423ca 1-111
+internal/output/output_test.go
+  s_f0a3efced18120::t_0464be4403b86f 1-162
+internal/output/table.go
+  s_f0a3efced18120::t_3d018aa0fe1262 1-55
+internal/output/text.go
+  s_f0a3efced18120::t_86b8a9b2616803 1-26
+main.go
+  s_f0a3efced18120::t_33017e1e9ed257 1-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d4aaed9aa0c539c6a4befca204e1f7982a18fdbf",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    },
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
