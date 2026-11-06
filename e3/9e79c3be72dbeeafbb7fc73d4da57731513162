@@ -1,0 +1,24 @@
+cmd/root.go
+  h_5a7459c565b0c6 15,18-20,64-69
+cmd/root_test.go
+  h_5a7459c565b0c6 72-204
+internal/commands/credentials/credentials.go
+  h_5a7459c565b0c6 1-79
+internal/commands/integrations/integrations.go
+  h_5a7459c565b0c6 1-159
+internal/commands/skills/skills.go
+  h_5a7459c565b0c6 1-98
+internal/commands/templates/templates.go
+  h_5a7459c565b0c6 1-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "e39e79c3be72dbeeafbb7fc73d4da57731513162",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
