@@ -1,0 +1,22 @@
+internal/commands/datasets/columns.go
+  h_5a7459c565b0c6 1-99
+internal/commands/datasets/create.go
+  h_5a7459c565b0c6 1-63
+internal/commands/datasets/datasets.go
+  h_5a7459c565b0c6 60-61,63
+internal/commands/datasets/datasets_test.go
+  h_5a7459c565b0c6 5,174-282
+internal/commands/datasets/update.go
+  h_5a7459c565b0c6 1-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "ab174859f43ced46aebdabbe918fac18b63545d6",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
