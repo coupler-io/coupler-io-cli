@@ -1,0 +1,25 @@
+cmd/root_test.go
+  s_f419e24bfa7567::t_63c94068af0bd8 76-208,220-248
+internal/commands/credentials/credentials.go
+  s_f419e24bfa7567::t_386b0efd7b1b94 1-78
+internal/commands/integrations/integrations.go
+  s_f419e24bfa7567::t_b19fb6e6fc01fd 1-159
+internal/commands/skills/skills.go
+  s_f419e24bfa7567::t_775adb9f2c8322 1-98
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5557d7261731d6070d1ae5e200ca1cfe24b27082",
+  "prompts": {},
+  "sessions": {
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
