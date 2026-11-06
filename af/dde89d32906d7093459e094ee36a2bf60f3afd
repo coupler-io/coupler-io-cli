@@ -1,0 +1,67 @@
+.github/workflows/ci.yml
+  s_f0a3efced18120::t_1998ea53aeeb04 1-26
+.gitignore
+  s_f0a3efced18120::t_145904afde3c99 1-8
+Makefile
+  s_f0a3efced18120::t_a1a07fb67161e4 1-24
+README.md
+  s_f0a3efced18120::t_555e491ba33a75 1-13
+go.mod
+  s_f0a3efced18120::t_f86190b773ece8 1-24
+go.sum
+  s_f0a3efced18120::t_4498f93771026c 1-54
+internal/client/client.go
+  s_f0a3efced18120::t_6240f87ddeb4a9 1-129
+internal/client/client_test.go
+  s_f0a3efced18120::t_59cf9a150321df 1-125
+internal/client/errors.go
+  s_f0a3efced18120::t_cbc3bcbcab66ab 1-77
+internal/cmdtest/cmdtest.go
+  s_f0a3efced18120::t_68e6d52d850d54 1-78
+internal/cmdutil/args.go
+  s_f0a3efced18120::t_8db767c431c673 1-60
+internal/cmdutil/args_test.go
+  s_f0a3efced18120::t_d7e307495e9abe 1-66
+internal/cmdutil/detail.go
+  s_f0a3efced18120::t_bd32b9a6ad73ec 1-71
+internal/cmdutil/factory.go
+  s_f0a3efced18120::t_5117bdd9f5e266 1-58
+internal/cmdutil/paths.go
+  s_f0a3efced18120::t_b4549d73ec4089 1-36
+internal/cmdutil/print.go
+  s_f0a3efced18120::t_002ebb2854f538 1-43
+internal/config/config.go
+  s_f0a3efced18120::t_fd0c30f51368a4 1-70
+internal/output/csv.go
+  s_f0a3efced18120::t_4773cf70e58680 1-39
+internal/output/formatter.go
+  s_f0a3efced18120::t_f478b7676e9d5b 1-154
+internal/output/json.go
+  s_f0a3efced18120::t_b5bcda7cdeec2e 1-15
+internal/output/list.go
+  s_f0a3efced18120::t_028070284f2f86 1-111
+internal/output/output_test.go
+  s_f0a3efced18120::t_b235868a198268 1-162
+internal/output/table.go
+  s_f0a3efced18120::t_2c93589ed247e0 1-55
+internal/output/text.go
+  s_f0a3efced18120::t_d26b27519ddb66 1-26
+main.go
+  s_f0a3efced18120::t_d72d1e9e7422e8 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "afdde89d32906d7093459e094ee36a2bf60f3afd",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
