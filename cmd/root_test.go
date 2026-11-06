@@ -61,6 +61,18 @@ func TestOutputFlagJSONAndInvalid(t *testing.T) {
 	}
 }
 
+func TestWorkspaceFlagAndEnv(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/v1/workspaces/7/dataflows" {
+			t.Errorf("unexpected path %s", r.URL.Path)
+		}
+		cmdtest.JSON(w, 200, []interface{}{})
+	})
+	if err := run(t, env, "dataflows", "list", "-w", "7"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestMissingTokenWithoutOverride(t *testing.T) {
 	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) { t.Error("no request expected") })
 	env.Factory.ClientOverride = nil
@@ -79,6 +91,18 @@ func TestRuntimeErrorsExitWithCode1(t *testing.T) {
 	err := run(t, env, "workspaces", "list")
 	if err == nil || cmdutil.ExitCode(err) != cmdutil.ExitError {
 		t.Fatalf("got %v (code %d)", err, cmdutil.ExitCode(err))
+	}
+}
+
+func TestGroupWithoutSubcommandPrintsHelp(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) { t.Error("no request expected") })
+	root := cmd.NewRootCmd(env.Factory)
+	root.SetOut(env.Out)
+	if err := cmdtest.Run(root, "dataflows"); err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(env.Out.String(), "Usage:") {
+		t.Errorf("expected help output, got:\n%s", env.Out.String())
 	}
 }
 
