@@ -18,8 +18,10 @@ import (
 	"github.com/coupler-io/coupler-io-cli/internal/commands/credentials"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/dataflows"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/datasets"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/destinations"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/integrations"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/skills"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/sources"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/templates"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/workspaces"
 	"github.com/coupler-io/coupler-io-cli/internal/config"
@@ -82,6 +84,8 @@ Get started:
 
 	// Dataflows
 	cmd.AddCommand(dataflows.NewCmdDataflows(f))
+	cmd.AddCommand(sources.NewCmdSources(f))
+	cmd.AddCommand(destinations.NewCmdDestinations(f))
 
 	// Data
 	cmd.AddCommand(datasets.NewCmdDatasets(f))
