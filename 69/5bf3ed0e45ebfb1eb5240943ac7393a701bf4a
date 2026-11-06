@@ -1,0 +1,24 @@
+cmd/root.go
+  h_5a7459c565b0c6 14-15,48-51
+cmd/root_test.go
+  h_5a7459c565b0c6 1-69
+go.mod
+  h_5a7459c565b0c6 8
+internal/commands/configure/configure.go
+  h_5a7459c565b0c6 1-134
+internal/commands/configure/configure_test.go
+  h_5a7459c565b0c6 1-177
+internal/commands/workspaces/workspaces.go
+  h_5a7459c565b0c6 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "695bf3ed0e45ebfb1eb5240943ac7393a701bf4a",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
