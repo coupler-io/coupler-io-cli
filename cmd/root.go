@@ -14,6 +14,8 @@ import (
 
 	"github.com/coupler-io/coupler-io-cli/internal/client"
 	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/configure"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/workspaces"
 	"github.com/coupler-io/coupler-io-cli/internal/config"
 	"github.com/coupler-io/coupler-io-cli/internal/output"
 )
@@ -67,6 +69,10 @@ Get started:
 		}
 		return names, cobra.ShellCompDirectiveNoFileComp
 	})
+
+	// Setup
+	cmd.AddCommand(configure.NewCmdConfigure(f))
+	cmd.AddCommand(workspaces.NewCmdWorkspaces(f))
 
 	cmd.AddCommand(newCompletionCmd())
 
