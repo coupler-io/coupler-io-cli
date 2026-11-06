@@ -1,0 +1,19 @@
+README.md
+  s_f0a3efced18120::t_5bf4527b53c259 27,30-32,39,44-50,111-124
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4463af4b870c9460083343036c96bda9687d2567",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
