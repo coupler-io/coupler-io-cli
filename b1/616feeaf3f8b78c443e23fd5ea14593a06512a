@@ -1,0 +1,19 @@
+internal/commands/configure/configure_test.go
+  s_f419e24bfa7567::t_ec57eb056e8dec 1-176
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b1616feeaf3f8b78c443e23fd5ea14593a06512a",
+  "prompts": {},
+  "sessions": {
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
