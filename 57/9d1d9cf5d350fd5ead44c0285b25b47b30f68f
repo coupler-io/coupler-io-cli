@@ -1,0 +1,22 @@
+cmd/root.go
+  h_5a7459c565b0c6 18,21,62-63
+internal/commands/destinations/destinations.go
+  h_5a7459c565b0c6 1-167
+internal/commands/destinations/destinations_test.go
+  h_5a7459c565b0c6 1-73
+internal/commands/sources/sources.go
+  h_5a7459c565b0c6 1-178
+internal/commands/sources/sources_test.go
+  h_5a7459c565b0c6 1-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "579d1d9cf5d350fd5ead44c0285b25b47b30f68f",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
