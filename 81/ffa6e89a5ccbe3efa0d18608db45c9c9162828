@@ -1,0 +1,27 @@
+internal/commands/datasets/datasets_test.go
+  s_f419e24bfa7567::t_186068d9ca6ca1 1-203
+internal/commands/datasets/get.go
+  s_f419e24bfa7567::t_4e7cc6c1c708d5 1-34
+internal/commands/datasets/list.go
+  s_f419e24bfa7567::t_2a1b0f01819cdb 1-43
+internal/commands/datasets/query.go
+  s_f419e24bfa7567::t_2458c7d7dac0f5 1-92
+internal/commands/datasets/snapshots.go
+  s_f419e24bfa7567::t_1992c760654955 1-93
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "81ffa6e89a5ccbe3efa0d18608db45c9c9162828",
+  "prompts": {},
+  "sessions": {
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
