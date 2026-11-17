@@ -1,0 +1,25 @@
+internal/commands/credentials/credentials.go
+  h_5a7459c565b0c6 40
+  s_f0a3efced18120::t_bc06fec1fb4799 71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "be015d7971cb29831ca870fdeb192b78266ec0ae",
+  "prompts": {},
+  "humans": {
+    "h_5a7459c565b0c6": {
+      "author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
