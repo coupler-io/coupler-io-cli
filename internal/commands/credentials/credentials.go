@@ -37,7 +37,7 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
 		Use:   "list",
 		Short: "List credentials in the workspace",
 		Example: `  coupler credentials list --type source
-  coupler credentials list --provider google`,
+  coupler credentials list --provider google_spreadsheet`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if credType != "" && credType != "source" && credType != "destination" {
@@ -72,7 +72,7 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
 		},
 	}
 
-	cmd.Flags().StringVar(&provider, "provider", "", "Filter by provider (e.g. google)")
+	cmd.Flags().StringVar(&provider, "provider", "", "Filter by credential provider, e.g. google_spreadsheet. Find an integration's provider in the CREDENTIAL_PROVIDER field of 'coupler integrations sources get <key>' or 'coupler integrations destinations get <key>'")
 	cmd.Flags().StringVar(&credType, "type", "", "Filter by type: source or destination")
 	return cmd
 }
