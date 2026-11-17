@@ -1,0 +1,21 @@
+.github/workflows/release.yml
+  s_f0a3efced18120::t_bc57f33a611700 24
+README.md
+  s_f0a3efced18120::t_289282248bb84a 70-71,105-114,129,136-152,157,171,175
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3475707c139e4f18eee2d4bab1bad1e90d2564cb",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
