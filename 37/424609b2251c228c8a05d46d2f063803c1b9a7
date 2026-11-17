@@ -1,0 +1,44 @@
+internal/commands/sources/sources.go
+  s_f419e24bfa7567::t_e3760640e52f0a 2-7,9-11,15-16,19,21-22,25
+  s_f0a3efced18120::t_b028dbc4bcdb12 1,8,12-14,17-18,20,23-24
+internal/commands/dataflowparts/dataflowparts_test.go
+  s_f0a3efced18120::t_bf6a69b68205a3 48
+  s_f0a3efced18120::t_fe59a84f288f93 45-47
+  s_f0a3efced18120::t_e4a326c4089b67 49-51
+  s_f0a3efced18120::t_1abf27b226d570 1-44,52-137
+internal/commands/dataflowparts/dataflowparts.go
+  s_f0a3efced18120::t_c0f8d662021fa6 1-197
+internal/commands/destinations/destinations.go
+  s_f419e24bfa7567::t_12f4f376dfeac2 2-7,9-11,15-16,19,21,27
+  s_f0a3efced18120::t_ee2020869031fc 1,8,12-14,17-18,20,22-26
+cmd/root.go
+  s_f0a3efced18120::t_9873bf1fee1931 21,24,87-88
+internal/commands/destinations/destinations_test.go
+  s_f0a3efced18120::t_c347a495bf1005 1-71
+internal/commands/sources/sources_test.go
+  s_f0a3efced18120::t_fc04cbb684f834 1-82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "37424609b2251c228c8a05d46d2f063803c1b9a7",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    },
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
