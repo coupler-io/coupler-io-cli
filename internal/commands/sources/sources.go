@@ -1,4 +1,4 @@
-// Package sources defines the `coupler sources` command group.
+// Package sources defines the `coupler-io sources` command group.
 package sources
 
 import (
@@ -12,14 +12,14 @@ func NewCmdSources(f *cmdutil.Factory) *cobra.Command {
 	return dataflowparts.NewCmd(f, dataflowparts.Spec{
 		Noun:   "source",
 		Plural: "sources",
-		Long: "A source pulls data into a dataflow. Find integration keys with `coupler integrations sources list`, " +
-			"their params with `coupler integrations sources get <key>`, and credentials with `coupler credentials list`.",
+		Long: "A source pulls data into a dataflow. Find integration keys with `coupler-io integrations sources list`, " +
+			"their params with `coupler-io integrations sources get <key>`, and credentials with `coupler-io credentials list`.",
 		IntegrationExample: "csv or gsheet",
-		CreateExample: `  coupler sources create --dataflow-id <id> --integration csv --param url=https://example.com/data.csv
-  coupler sources create --dataflow-id <id> --integration gsheet --credential-id 15 --params @gsheet.json`,
-		UpdateExample: `  coupler sources update <id> --param url=https://example.com/new.csv
-  coupler sources update <id> --lifecycle-state paused
-  coupler sources update <id> --enabled=false`,
+		CreateExample: `  coupler-io sources create --dataflow-id <id> --integration csv --param url=https://example.com/data.csv
+  coupler-io sources create --dataflow-id <id> --integration gsheet --credential-id 15 --params @gsheet.json`,
+		UpdateExample: `  coupler-io sources update <id> --param url=https://example.com/new.csv
+  coupler-io sources update <id> --lifecycle-state paused
+  coupler-io sources update <id> --enabled=false`,
 		SupportsEnabled: true,
 	})
 }

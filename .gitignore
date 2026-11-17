@@ -1,8 +1,8 @@
-/coupler
+/coupler-io
 /dist/
 *.exe
 .DS_Store
 
 # Local config can contain an API token
-.coupler.yaml
-.coupler*.yml
+.coupler-io.yaml
+.coupler-io*.yml

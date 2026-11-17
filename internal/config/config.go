@@ -1,5 +1,5 @@
-// Package config resolves settings from flags, COUPLER_* env vars and
-// ~/.coupler.yaml (in that order of precedence).
+// Package config resolves settings from flags, COUPLER_IO_* env vars and
+// ~/.coupler-io.yaml (in that order of precedence).
 package config
 
 import (
@@ -20,17 +20,17 @@ const (
 	KeyOutput      = "output"
 )
 
-// Load binds COUPLER_* env vars to v and reads ~/.coupler.yaml into it.
+// Load binds COUPLER_IO_* env vars to v and reads ~/.coupler-io.yaml into it.
 //
 // Only the config file in the user's home directory is read. The current
-// directory is deliberately not searched: a .coupler.yaml inside an untrusted
+// directory is deliberately not searched: a .coupler-io.yaml inside an untrusted
 // checkout could otherwise point api-url at a hostile host and receive the
 // API token.
 //
 // A missing file is not an error. A file that exists but cannot be read or
 // parsed is, so a typo does not silently drop the saved token.
 func Load(v *viper.Viper) error {
-	v.SetEnvPrefix("COUPLER")
+	v.SetEnvPrefix("COUPLER_IO")
 	v.SetEnvKeyReplacer(strings.NewReplacer("-", "_"))
 	v.AutomaticEnv()
 
@@ -49,7 +49,7 @@ func Load(v *viper.Viper) error {
 func RequireAPIToken(v *viper.Viper) (string, error) {
 	token := v.GetString(KeyAPIToken)
 	if token == "" {
-		return "", errors.New("api-token is required: set via --api-token, --api-token-stdin, COUPLER_API_TOKEN, or run `coupler configure`")
+		return "", errors.New("api-token is required: set via --api-token, --api-token-stdin, COUPLER_IO_API_TOKEN, or run `coupler-io configure`")
 	}
 	return token, nil
 }
@@ -57,17 +57,17 @@ func RequireAPIToken(v *viper.Viper) (string, error) {
 func RequireWorkspaceID(v *viper.Viper) (string, error) {
 	id := v.GetString(KeyWorkspaceID)
 	if id == "" {
-		return "", errors.New("workspace-id is required: set via --workspace-id, COUPLER_WORKSPACE_ID, or run `coupler configure` (list ids with `coupler workspaces list`)")
+		return "", errors.New("workspace-id is required: set via --workspace-id, COUPLER_IO_WORKSPACE_ID, or run `coupler-io configure` (list ids with `coupler-io workspaces list`)")
 	}
 	return id, nil
 }
 
-// ConfigFilePath returns ~/.coupler.yaml. It fails when the home directory is
+// ConfigFilePath returns ~/.coupler-io.yaml. It fails when the home directory is
 // unknown rather than falling back to a path relative to the current directory.
 func ConfigFilePath() (string, error) {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return "", fmt.Errorf("locate home directory: %w", err)
 	}
-	return filepath.Join(home, ".coupler.yaml"), nil
+	return filepath.Join(home, ".coupler-io.yaml"), nil
 }

@@ -32,8 +32,8 @@ func newCmdColumnsUpdate(f *cmdutil.Factory) *cobra.Command {
 		Long: "Update one column with --key plus --label and/or --description, or several at once with " +
 			"--updates (a JSON array, @file or -). Columns are matched by key (see `datasets get`). " +
 			"Fields you omit stay unchanged; an empty --label or --description clears it.",
-		Example: `  coupler datasets columns update <dataset-id> --key revenue --label "Revenue" --description "Net, USD"
-  coupler datasets columns update <dataset-id> --updates '[{"key":"revenue","label":"Revenue"},{"key":"cost","label":"Cost"}]'`,
+		Example: `  coupler-io datasets columns update <dataset-id> --key revenue --label "Revenue" --description "Net, USD"
+  coupler-io datasets columns update <dataset-id> --updates '[{"key":"revenue","label":"Revenue"},{"key":"cost","label":"Cost"}]'`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			flags := cmd.Flags()

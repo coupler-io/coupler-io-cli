@@ -44,7 +44,7 @@ func NewCmdDataflows(f *cmdutil.Factory) *cobra.Command {
 		Aliases: []string{"dataflow"},
 		Short:   "Manage dataflows",
 		Long: "A dataflow moves data from one or more sources to destinations on a schedule. " +
-			"Add sources and destinations with `coupler sources` and `coupler destinations`.",
+			"Add sources and destinations with `coupler-io sources` and `coupler-io destinations`.",
 	}
 
 	cmd.AddCommand(newCmdList(f))

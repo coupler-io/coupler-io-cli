@@ -24,7 +24,7 @@ func (e *APIError) Error() string {
 	}
 	switch e.StatusCode {
 	case http.StatusUnauthorized:
-		msg += " (check your API token, or run `coupler configure`)"
+		msg += " (check your API token, or run `coupler-io configure`)"
 	case http.StatusForbidden:
 		msg += " (check workspace access and that your plan includes the public API)"
 	case http.StatusTooManyRequests:

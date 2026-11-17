@@ -45,7 +45,7 @@ func NewFactory() *Factory {
 	}
 }
 
-// LoadConfig reads ~/.coupler.yaml and COUPLER_* env into f.Viper and records
+// LoadConfig reads ~/.coupler-io.yaml and COUPLER_IO_* env into f.Viper and records
 // any failure in f.ConfigErr.
 func (f *Factory) LoadConfig() {
 	f.ConfigErr = config.Load(f.Viper)

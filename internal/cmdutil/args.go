@@ -9,7 +9,7 @@ import (
 )
 
 // AnnotationIgnoreConfigError, set (to any value) on a command, lets it run
-// even when ~/.coupler.yaml is unreadable, e.g. so `configure` can repair it.
+// even when ~/.coupler-io.yaml is unreadable, e.g. so `configure` can repair it.
 const AnnotationIgnoreConfigError = "coupler.io/ignore-config-error"
 
 // RequireFlag returns a usage error when a required string flag is empty.

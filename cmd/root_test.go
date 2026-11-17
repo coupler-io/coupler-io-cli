@@ -56,7 +56,7 @@ func TestWorkspaceFlagAndEnv(t *testing.T) {
 func TestMissingTokenWithoutOverride(t *testing.T) {
 	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) { t.Error("no request expected") })
 	env.Factory.ClientOverride = nil
-	t.Setenv("COUPLER_API_TOKEN", "")
+	t.Setenv("COUPLER_IO_API_TOKEN", "")
 
 	err := run(t, env, "workspaces", "list")
 	if err == nil || !strings.Contains(err.Error(), "api-token is required") {
@@ -154,7 +154,7 @@ func TestBadConfigFileBlocksCommandsButNotConfigure(t *testing.T) {
 	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
 		cmdtest.JSON(w, 200, map[string]interface{}{"workspaces": []interface{}{}})
 	})
-	env.Factory.ConfigErr = errors.New("read config file ~/.coupler.yaml: bad yaml")
+	env.Factory.ConfigErr = errors.New("read config file ~/.coupler-io.yaml: bad yaml")
 
 	err := run(t, env, "workspaces", "list")
 	if err == nil || !strings.Contains(err.Error(), "bad yaml") {

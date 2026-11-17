@@ -17,7 +17,7 @@ import (
 const DefaultBaseURL = "https://api.coupler.io"
 
 // UserAgent is sent with every request. main sets it to include the version.
-var UserAgent = "coupler-cli"
+var UserAgent = "coupler-io-cli"
 
 type Client struct {
 	httpClient *http.Client

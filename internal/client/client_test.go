@@ -81,7 +81,7 @@ func TestAPIErrorParsing(t *testing.T) {
 		{"string error", 400, `{"error":"bad input"}`, "", "bad input", "bad input"},
 		{"top-level message", 422, `{"message":"nope"}`, "", "nope", "nope"},
 		{"plain text", 502, `upstream exploded`, "", "upstream exploded", "upstream exploded"},
-		{"unauthorized hint", 401, `{"error":{"message":"invalid token"}}`, "", "invalid token", "coupler configure"},
+		{"unauthorized hint", 401, `{"error":{"message":"invalid token"}}`, "", "invalid token", "coupler-io configure"},
 		{"rate limited", 429, `{"error":{"message":"API rate limit exceeded."}}`, "60", "API rate limit exceeded.", "retry in 60s"},
 	}
 

@@ -85,7 +85,7 @@ func newCmdGet(f *cmdutil.Factory, kind string) *cobra.Command {
 		Short: fmt.Sprintf("Show a %s integration and the params it accepts", kind),
 		Long: fmt.Sprintf("Shows the params you can set when creating a %[1]s with this integration. "+
 			"Use --output json to also see llm_instructions and option lists.", kind),
-		Example: fmt.Sprintf("  coupler integrations %ss get csv", kind),
+		Example: fmt.Sprintf("  coupler-io integrations %ss get csv", kind),
 		Args:    cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := f.NewClient()
@@ -114,7 +114,7 @@ func newCmdFieldOptions(f *cmdutil.Factory) *cobra.Command {
 		Long: "Some params only accept values that depend on the connected account, such as a list of " +
 			"ad accounts. This resolves them live from the source. Use `integrations sources get` to see " +
 			"which params have `options_requires_credential` or `options_depends_on`.",
-		Example: `  coupler integrations sources field-options gsheet --field sheetsList --credential-id 15 \
+		Example: `  coupler-io integrations sources field-options gsheet --field sheetsList --credential-id 15 \
       --param spreadsheetURL=https://docs.google.com/spreadsheets/d/...`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {

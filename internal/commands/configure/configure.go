@@ -33,16 +33,16 @@ func NewCmdConfigure(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "configure",
 		Short: "Save your API token and default workspace",
-		Long: `Validates your personal API token, picks a workspace, and saves both to ~/.coupler.yaml
+		Long: `Validates your personal API token, picks a workspace, and saves both to ~/.coupler-io.yaml
 (readable only by you).
 
 Get a token in the API access section of your Coupler.io profile: https://app.coupler.io/app/profile
 
-The token comes from --api-token-stdin, COUPLER_API_TOKEN or --api-token (the last one is visible
+The token comes from --api-token-stdin, COUPLER_IO_API_TOKEN or --api-token (the last one is visible
 in your shell history and process list). If your token can access several workspaces
 and you do not pass --workspace-id, you are asked to choose one.`,
-		Example: `  echo "$COUPLER_TOKEN" | coupler configure --api-token-stdin --workspace-id 42
-  coupler configure --api-token <token>`,
+		Example: `  echo "$COUPLER_IO_TOKEN" | coupler-io configure --api-token-stdin --workspace-id 42
+  coupler-io configure --api-token <token>`,
 		Args: cobra.NoArgs,
 		// Must run even when the existing config file is corrupt: this
 		// command is how the user overwrites it.

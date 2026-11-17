@@ -24,9 +24,9 @@ returned and the request times out after 60 seconds. To export all data, add a d
 to the dataflow instead.
 
 Use --output csv for spreadsheet-friendly results or --output json for the raw response.`,
-		Example: `  coupler datasets query <id> --statement 'select * from data limit 5'
-  coupler datasets query <id> -s @report.sql -o csv > report.csv
-  echo 'select count(*) from data' | coupler datasets query <id> -s -`,
+		Example: `  coupler-io datasets query <id> --statement 'select * from data limit 5'
+  coupler-io datasets query <id> -s @report.sql -o csv > report.csv
+  echo 'select count(*) from data' | coupler-io datasets query <id> -s -`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := cmdutil.RequireFlag("statement", statement); err != nil {

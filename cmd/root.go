@@ -30,14 +30,14 @@ import (
 
 func NewRootCmd(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "coupler",
+		Use:   "coupler-io",
 		Short: "CLI for the Coupler.io data integration platform",
 		Long: `A command-line interface for Coupler.io: manage dataflows, sources and destinations,
 and query the data they produce.
 
 Get started:
-  echo "$COUPLER_TOKEN" | coupler configure --api-token-stdin
-  coupler dataflows list`,
+  echo "$COUPLER_IO_TOKEN" | coupler-io configure --api-token-stdin
+  coupler-io dataflows list`,
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
@@ -60,11 +60,11 @@ Get started:
 	})
 
 	flags := cmd.PersistentFlags()
-	flags.String("api-token", "", "Coupler.io API token; visible in shell history and the process list, prefer --api-token-stdin or COUPLER_API_TOKEN")
+	flags.String("api-token", "", "Coupler.io API token; visible in shell history and the process list, prefer --api-token-stdin or COUPLER_IO_API_TOKEN")
 	flags.Bool("api-token-stdin", false, "Read the API token from standard input")
-	flags.StringP("workspace-id", "w", "", "Workspace id (env: COUPLER_WORKSPACE_ID)")
-	flags.String("api-url", "", "API base URL, default "+client.DefaultBaseURL+" (env: COUPLER_API_URL)")
-	flags.StringP("output", "o", "table", "Output format: table, json, text, csv (env: COUPLER_OUTPUT)")
+	flags.StringP("workspace-id", "w", "", "Workspace id (env: COUPLER_IO_WORKSPACE_ID)")
+	flags.String("api-url", "", "API base URL, default "+client.DefaultBaseURL+" (env: COUPLER_IO_API_URL)")
+	flags.StringP("output", "o", "table", "Output format: table, json, text, csv (env: COUPLER_IO_OUTPUT)")
 
 	for _, name := range []string{"api-token", "workspace-id", "api-url", "output"} {
 		_ = f.Viper.BindPFlag(name, flags.Lookup(name))
@@ -191,7 +191,7 @@ var buildVersion = "dev"
 // SetVersion records build metadata injected by GoReleaser via ldflags.
 func SetVersion(version, commit, date string) {
 	buildVersion = fmt.Sprintf("%s (commit: %s, built: %s)", version, commit, date)
-	client.UserAgent = "coupler-cli/" + version
+	client.UserAgent = "coupler-io-cli/" + version
 }
 
 // Execute runs the CLI and returns the process exit code: 0 on success, 2 for

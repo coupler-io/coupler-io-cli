@@ -18,9 +18,9 @@ func newCmdUpdate(f *cmdutil.Factory) *cobra.Command {
 		Long: "--ai-context stores Markdown that describes the dataset for AI agents. " +
 			"--query only works on custom SQL datasets. Pass an empty string to --name or --ai-context to clear it. " +
 			"Values may be @file or - (stdin).",
-		Example: `  coupler datasets update <id> --name "Campaigns 2026"
-  coupler datasets update <id> --ai-context @notes.md
-  coupler datasets update <id> --query 'select id from "campaigns"'`,
+		Example: `  coupler-io datasets update <id> --name "Campaigns 2026"
+  coupler-io datasets update <id> --ai-context @notes.md
+  coupler-io datasets update <id> --query 'select id from "campaigns"'`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			flags := cmd.Flags()

@@ -16,10 +16,10 @@ func newCmdCreate(f *cmdutil.Factory) *cobra.Command {
 		Use:   "create",
 		Short: "Add a custom SQL dataset to a dataflow",
 		Long: "Creates a dataset defined by a SELECT statement over the dataflow's source tables. " +
-			"Quote table names. Use `coupler datasets list --dataflow-id <id>` and `datasets get` to find them.",
-		Example: `  coupler datasets create --dataflow-id <id> --name "Summary" \
+			"Quote table names. Use `coupler-io datasets list --dataflow-id <id>` and `datasets get` to find them.",
+		Example: `  coupler-io datasets create --dataflow-id <id> --name "Summary" \
       --query 'select country, sum(revenue) as revenue from "sales" group by country'
-  coupler datasets create --dataflow-id <id> --query @summary.sql`,
+  coupler-io datasets create --dataflow-id <id> --query @summary.sql`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := cmdutil.RequireFlag("dataflow-id", dataflowID); err != nil {
