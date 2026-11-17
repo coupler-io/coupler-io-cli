@@ -2,7 +2,7 @@
 
 Command-line interface for [Coupler.io](https://www.coupler.io): manage dataflows, sources and destinations, and query the data they produce, from your terminal, scripts and CI.
 
-It wraps the Coupler.io public API (`https://api.coupler.io`, [reference](https://api.coupler.io/api-docs)).
+It wraps the Coupler.io public API (`https://api.coupler.io`, [documentation](https://docs.coupler.io/api)).
 
 ## Install
 
@@ -20,8 +20,15 @@ Shell completion: `coupler completion zsh|bash|fish|powershell`.
 
 ## Authenticate
 
-1. Copy your personal API token from the **API access** section of your [Coupler.io profile](https://app.coupler.io/app/profile). Your organization's plan must include the public API.
-2. Run:
+1. Copy your personal API token from the [API page](https://app.coupler.io/app/api) in Coupler.io. Your organization's plan must include the public API.
+2. Find your workspace id:
+
+```bash
+COUPLER_API_TOKEN="$COUPLER_TOKEN" coupler workspaces list
+```
+
+   If your token has a single workspace you can skip this step and the `--workspace-id` flag below: `configure` picks it automatically and prints its id.
+3. Run:
 
 ```bash
 echo "$COUPLER_TOKEN" | coupler configure --api-token-stdin --workspace-id 42
@@ -131,7 +138,7 @@ make test      # go test -race ./...
 make lint      # gofmt + go vet
 ```
 
-Layout follows [mailtrap-cli](https://github.com/mailtrap/mailtrap-cli):
+Project layout:
 
 ```
 main.go                      entry point, version injected by GoReleaser
