@@ -1,0 +1,95 @@
+internal/commands/dataflows/update.go
+  s_f0a3efced18120::t_27c5dcb3e7d825 37-40
+cmd/root_test.go
+  s_f0a3efced18120::t_ec060860fd70aa 59
+  s_f0a3efced18120::t_74809d014e7034 157
+internal/cmdutil/factory.go
+  s_f419e24bfa7567::t_10509de199196f 48
+internal/commands/sources/sources.go
+  s_f0a3efced18120::t_5e6fdc450bea55 1
+  s_f0a3efced18120::t_e4b4e19a20e4d6 15-16,18-22
+Makefile
+  s_f0a3efced18120::t_79edeafd05a07b 9-10,12
+  s_f0a3efced18120::t_5662b7ec24caaa 1
+internal/commands/destinations/destinations.go
+  s_f0a3efced18120::t_a6eef8a456a542 1
+  s_f0a3efced18120::t_3bdeeb30101147 16,18,20-21
+README.md
+  s_f0a3efced18120::t_d843efe46a7b14 12
+  s_f0a3efced18120::t_5274293015f474 14,17,19,27,30,38,40-42,44,48,50,55-60,81,86-88,90-92,94-96,112,132,156,167
+cmd/root.go
+  s_f419e24bfa7567::t_21c466a270bdd0 194
+  s_f0a3efced18120::t_a6b86603c87ee8 33,39-40,63,65-67
+internal/commands/dataflows/create.go
+  s_f0a3efced18120::t_51a813ce2fe20e 51
+  s_f0a3efced18120::t_8e02bf2186b48f 17-18
+internal/config/config_test.go
+  s_f419e24bfa7567::t_35dd6d43a3ecd6 41,57,72
+  s_f0a3efced18120::t_5da4a5bc0c1265 40
+.gitignore
+  s_f0a3efced18120::t_237e6ab1fcaa93 1,7-8
+.goreleaser.yml
+  s_f0a3efced18120::t_5cd568c36f902b 19
+internal/client/client.go
+  s_f0a3efced18120::t_ea6910119460aa 20
+internal/client/client_test.go
+  s_f0a3efced18120::t_b5096f239226df 84
+internal/client/errors.go
+  s_f0a3efced18120::t_da5e5d95fb9e84 27
+internal/cmdutil/args.go
+  s_f0a3efced18120::t_9102626f7b1daa 12
+internal/commands/configure/configure.go
+  s_f0a3efced18120::t_bcba27d5287788 36,41,44-45
+internal/commands/configure/configure_test.go
+  s_f0a3efced18120::t_8a88c81d85c88f 28,33
+internal/commands/credentials/credentials.go
+  s_f0a3efced18120::t_463dd586af31d1 39-40
+internal/commands/dataflowparts/dataflowparts.go
+  s_f0a3efced18120::t_cac0039d45d71f 112
+internal/commands/dataflows/dataflows.go
+  s_f0a3efced18120::t_38670833221715 47
+internal/commands/dataflows/run.go
+  s_f0a3efced18120::t_7bcb3048315bef 20-22
+internal/commands/datasets/columns.go
+  s_f0a3efced18120::t_8f51eb578ea78d 35-36
+internal/commands/datasets/create.go
+  s_f0a3efced18120::t_6b023397eebabd 19-20,22
+internal/commands/datasets/list.go
+  s_f0a3efced18120::t_9add14a1e7712f 20-21
+internal/commands/datasets/query.go
+  s_f0a3efced18120::t_06dab1c0545b0b 27-29
+internal/commands/datasets/update.go
+  s_f0a3efced18120::t_1fba37e426f69e 21-23
+internal/commands/integrations/integrations.go
+  s_f0a3efced18120::t_fe9f211be0db26 88,117
+internal/commands/templates/templates.go
+  s_f0a3efced18120::t_490e75bb575421 34
+internal/commands/workspaces/workspaces.go
+  s_f0a3efced18120::t_34e5bde5501756 32
+internal/config/config.go
+  s_f0a3efced18120::t_1f7a9e739a2823 1-2,23,26,33,52,60,65,72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "741c1bf4d7f5226db0d8d33964af5b51372df94a",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    },
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
