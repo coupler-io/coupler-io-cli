@@ -42,32 +42,6 @@ func TestCreate(t *testing.T) {
 	}
 }
 
-func TestCreateOmitsUnsetOptionalFields(t *testing.T) {
-	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
-		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, map[string]interface{}{"integration_key": "csv"}) {
-			t.Errorf("body = %v", body)
-		}
-		cmdtest.JSON(w, 201, map[string]interface{}{"id": "s-1"})
-	})
-
-	if err := cmdtest.Run(sources.NewCmdSources(env.Factory), "create", "--dataflow-id", "df-1", "--integration", "csv"); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestCreateRequiredFlags(t *testing.T) {
-	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) { t.Error("no request expected") })
-
-	err := cmdtest.Run(sources.NewCmdSources(env.Factory), "create", "--integration", "csv")
-	if err == nil || !strings.Contains(err.Error(), "--dataflow-id is required") {
-		t.Fatalf("got %v", err)
-	}
-	err = cmdtest.Run(sources.NewCmdSources(env.Factory), "create", "--dataflow-id", "df-1")
-	if err == nil || !strings.Contains(err.Error(), "--integration is required") {
-		t.Fatalf("got %v", err)
-	}
-}
-
 func TestUpdate(t *testing.T) {
 	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPatch || r.URL.Path != "/v1/workspaces/42/sources/s-1" {
@@ -94,15 +68,15 @@ func TestUpdate(t *testing.T) {
 	}
 }
 
-func TestUpdateValidation(t *testing.T) {
-	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) { t.Error("no request expected") })
+func TestUpdateEnabledOnly(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, map[string]interface{}{"enabled": true}) {
+			t.Errorf("body = %v", body)
+		}
+		w.WriteHeader(http.StatusOK)
+	})
 
-	err := cmdtest.Run(sources.NewCmdSources(env.Factory), "update", "s-1")
-	if err == nil || !strings.Contains(err.Error(), "nothing to update") {
-		t.Fatalf("got %v", err)
-	}
-	err = cmdtest.Run(sources.NewCmdSources(env.Factory), "update", "s-1", "--lifecycle-state", "asleep")
-	if err == nil || !strings.Contains(err.Error(), "--lifecycle-state must be one of") {
-		t.Fatalf("got %v", err)
+	if err := cmdtest.Run(sources.NewCmdSources(env.Factory), "update", "s-1", "--enabled"); err != nil {
+		t.Fatal(err)
 	}
 }

@@ -2,8 +2,6 @@ package datasets
 
 import (
 	"encoding/json"
-	"fmt"
-
 	"github.com/spf13/cobra"
 
 	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
@@ -44,7 +42,7 @@ func newCmdColumnsUpdate(f *cmdutil.Factory) *cobra.Command {
 			switch {
 			case updates != "":
 				if key != "" || flags.Changed("label") || flags.Changed("description") {
-					return fmt.Errorf("use either --updates or --key/--label/--description, not both")
+					return cmdutil.UsageErrorf("use either --updates or --key/--label/--description, not both")
 				}
 				raw, err := f.ReadArg(updates)
 				if err != nil {
@@ -55,7 +53,7 @@ func newCmdColumnsUpdate(f *cmdutil.Factory) *cobra.Command {
 				}
 			case key != "":
 				if !flags.Changed("label") && !flags.Changed("description") {
-					return fmt.Errorf("set --label and/or --description")
+					return cmdutil.UsageErrorf("set --label and/or --description")
 				}
 				update := map[string]interface{}{"key": key}
 				if flags.Changed("label") {
@@ -69,7 +67,7 @@ func newCmdColumnsUpdate(f *cmdutil.Factory) *cobra.Command {
 				return cmdutil.UsageErrorf("--key (with --label/--description) or --updates is required")
 			}
 			if len(columnUpdates) == 0 {
-				return fmt.Errorf("no column updates given")
+				return cmdutil.UsageErrorf("no column updates given")
 			}
 
 			c, err := f.NewClient()

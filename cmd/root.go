@@ -112,6 +112,10 @@ func readTokenFromStdin(cmd *cobra.Command, f *cmdutil.Factory) error {
 	if flag := cmd.Flag("api-token"); flag != nil && flag.Changed {
 		return cmdutil.UsageErrorf("--api-token and --api-token-stdin are mutually exclusive")
 	}
+	if f.StdinUsedBy != "" {
+		return cmdutil.UsageErrorf("standard input is already used by %s", f.StdinUsedBy)
+	}
+	f.StdinUsedBy = "--api-token-stdin"
 	data, err := io.ReadAll(f.IOStreams.In)
 	if err != nil {
 		return fmt.Errorf("read API token from stdin: %w", err)

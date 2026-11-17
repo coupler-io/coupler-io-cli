@@ -9,8 +9,6 @@ import (
 	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
 )
 
-var intervals = []string{"quarterHourly", "semiHourly", "hourly", "daily", "monthly"}
-
 func newCmdUpdate(f *cmdutil.Factory) *cobra.Command {
 	var (
 		name        string
@@ -53,23 +51,12 @@ Schedule fields by interval:
 				schedule["enabled"] = enabled
 			}
 			if flags.Changed("interval") {
-				if !contains(intervals, interval) {
-					return cmdutil.UsageErrorf("--interval must be one of: %v", intervals)
-				}
 				schedule["interval"] = interval
 			}
 			if flags.Changed("week-day") {
-				for _, d := range weekDays {
-					if d < 0 || d > 6 {
-						return cmdutil.UsageErrorf("--week-day must be between 0 (Monday) and 6 (Sunday)")
-					}
-				}
 				schedule["week_days"] = weekDays
 			}
 			if flags.Changed("month-day") {
-				if monthDay < 1 || monthDay > 28 {
-					return cmdutil.UsageErrorf("--month-day must be between 1 and 28")
-				}
 				schedule["month_day"] = monthDay
 			}
 			if flags.Changed("at") {
@@ -88,7 +75,7 @@ Schedule fields by interval:
 				body["schedule_config"] = schedule
 			}
 			if len(body) == 0 {
-				return fmt.Errorf("nothing to update: set --name or a schedule flag (see --help)")
+				return cmdutil.UsageErrorf("nothing to update: set --name or a schedule flag (see --help)")
 			}
 
 			c, err := f.NewClient()
@@ -119,13 +106,4 @@ Schedule fields by interval:
 	flags.IntVar(&activeStart, "active-hours-start", 0, "First active hour, 0-23 (hourly intervals)")
 	flags.IntVar(&activeEnd, "active-hours-end", 0, "Last active hour, 0-23 (hourly intervals)")
 	return cmd
-}
-
-func contains(list []string, v string) bool {
-	for _, s := range list {
-		if s == v {
-			return true
-		}
-	}
-	return false
 }

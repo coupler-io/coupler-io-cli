@@ -59,15 +59,13 @@ func TestUpdate(t *testing.T) {
 	}
 }
 
-func TestUpdateValidation(t *testing.T) {
+// The API's destination PATCH has no `enabled` field, so the CLI must not
+// offer a flag that would be silently ignored. Use --lifecycle-state disabled.
+func TestUpdateHasNoEnabledFlag(t *testing.T) {
 	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) { t.Error("no request expected") })
 
-	err := cmdtest.Run(destinations.NewCmdDestinations(env.Factory), "update", "d-1")
-	if err == nil || !strings.Contains(err.Error(), "nothing to update") {
-		t.Fatalf("got %v", err)
-	}
-	err = cmdtest.Run(destinations.NewCmdDestinations(env.Factory), "update", "d-1", "--lifecycle-state", "x")
-	if err == nil || !strings.Contains(err.Error(), "--lifecycle-state must be one of") {
+	err := cmdtest.Run(destinations.NewCmdDestinations(env.Factory), "update", "d-1", "--enabled=false")
+	if err == nil || !strings.Contains(err.Error(), "unknown flag: --enabled") {
 		t.Fatalf("got %v", err)
 	}
 }

@@ -40,10 +40,6 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
   coupler credentials list --provider google`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if credType != "" && credType != "source" && credType != "destination" {
-				return cmdutil.UsageErrorf("--type must be source or destination")
-			}
-
 			c, err := f.NewClient()
 			if err != nil {
 				return err
