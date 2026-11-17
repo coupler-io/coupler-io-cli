@@ -1,0 +1,29 @@
+internal/commands/dataflows/create.go
+  s_f419e24bfa7567::t_c94a07247554da 1-53
+internal/commands/dataflows/dataflows_test.go
+  s_f419e24bfa7567::t_486eb7f0db7b1a 1-254
+internal/commands/dataflows/get.go
+  s_f419e24bfa7567::t_d8d2cf2a0f41dd 1-60
+internal/commands/dataflows/list.go
+  s_f419e24bfa7567::t_53c058d6a7ebb7 1-34
+internal/commands/dataflows/run.go
+  s_f419e24bfa7567::t_d0f95dd426f9af 1-48
+internal/commands/dataflows/update.go
+  s_f419e24bfa7567::t_7f3d9238e1ff9b 1-131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1164157c76dd03783a9fbd552fbcadbab82435cc",
+  "prompts": {},
+  "sessions": {
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
