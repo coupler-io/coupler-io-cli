@@ -1,0 +1,47 @@
+internal/commands/credentials/credentials_test.go
+  s_f0a3efced18120::t_7036a854a2268b 1-85
+internal/commands/skills/skills_test.go
+  s_f0a3efced18120::t_39dcdff3eae78c 9,11-92
+  s_f0a3efced18120::t_680fbea8f072f2 1-8,10
+internal/commands/integrations/integrations.go
+  s_f419e24bfa7567::t_b19fb6e6fc01fd 1-159
+internal/commands/templates/templates_test.go
+  s_f0a3efced18120::t_5007c309d1032d 8-9,11-48
+  s_f0a3efced18120::t_5172dfbcfd4e4a 1-7,10
+internal/commands/credentials/credentials.go
+  s_f419e24bfa7567::t_386b0efd7b1b94 1-74
+internal/commands/skills/skills.go
+  s_f419e24bfa7567::t_775adb9f2c8322 1-98
+internal/commands/integrations/integrations_test.go
+  s_f0a3efced18120::t_498f34a37b9435 1-152
+cmd/root_test.go
+  s_f419e24bfa7567::t_63c94068af0bd8 67-95
+cmd/root.go
+  s_f0a3efced18120::t_9f2a5a12c9aae1 18,21-23,89-94
+internal/commands/templates/templates.go
+  s_f0a3efced18120::t_40b0e6eebca7e2 1-49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "bc1b3d8debe6c2c4186eb703ffd0a743c7b62937",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    },
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
