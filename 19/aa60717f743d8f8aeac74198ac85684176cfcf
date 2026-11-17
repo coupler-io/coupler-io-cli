@@ -1,0 +1,65 @@
+.github/workflows/ci.yml
+  s_f0a3efced18120::t_75b1447a0f3e74 26
+.github/workflows/release.yml
+  s_f0a3efced18120::t_1d098388d60cc4 24
+README.md
+  s_f0a3efced18120::t_c0549c69398c04 70-71,105-114,129,136-152,157,171,175
+cmd/root.go
+  s_f0a3efced18120::t_a2533a71909ea8 115-118
+cmd/stdin_test.go
+  s_f0a3efced18120::t_c9582e10b1c213 1-39
+internal/cmdutil/args.go
+  s_f0a3efced18120::t_5edf70fe47fa3d 24-25,29-32
+internal/cmdutil/args_test.go
+  s_f0a3efced18120::t_866222eef7b1e7 4,63-81
+internal/cmdutil/factory.go
+  s_f0a3efced18120::t_b2de6ff3698753 31-34
+internal/commands/credentials/credentials_test.go
+  s_f0a3efced18120::t_5b4161c82a8826 1-85
+internal/commands/dataflowparts/dataflowparts.go
+  s_f0a3efced18120::t_7b8d7a7f21ec25 1-197
+internal/commands/dataflowparts/dataflowparts_test.go
+  s_f0a3efced18120::t_fd57898c41c34b 1-137
+internal/commands/dataflows/dataflows_test.go
+  s_f0a3efced18120::t_af7223c3282a78 10,175-177,192-194,199-221,241
+internal/commands/dataflows/update.go
+  s_f0a3efced18120::t_51c937337747ba 78
+internal/commands/datasets/columns.go
+  s_f0a3efced18120::t_01c5d5700e9740 45,56,70
+internal/commands/datasets/datasets_test.go
+  s_f0a3efced18120::t_e72dfa01969957 10,229-231,279-280,282-283
+internal/commands/datasets/update.go
+  s_f0a3efced18120::t_04792ca0167be6 48
+internal/commands/destinations/destinations.go
+  s_f0a3efced18120::t_5d1b63f24715fd 1,8,12-14,17-18,20,22-26
+internal/commands/destinations/destinations_test.go
+  s_f0a3efced18120::t_cfd6adb1d880b9 62-64,67-68
+internal/commands/integrations/integrations_test.go
+  s_f0a3efced18120::t_1dde6acc22f575 1-152
+internal/commands/skills/skills_test.go
+  s_f0a3efced18120::t_b057e0d5927cb1 1-92
+internal/commands/sources/sources.go
+  s_f0a3efced18120::t_70ac97951e53b3 1,8,12-14,17-18,20,23-24
+internal/commands/sources/sources_test.go
+  s_f0a3efced18120::t_46d98fe0b1fcca 71-77,79-80
+internal/commands/templates/templates_test.go
+  s_f0a3efced18120::t_02315b994ad2bc 1-48
+internal/commands/workspaces/workspaces_test.go
+  s_f0a3efced18120::t_1583f799bfaba6 1-66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "19aa60717f743d8f8aeac74198ac85684176cfcf",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
