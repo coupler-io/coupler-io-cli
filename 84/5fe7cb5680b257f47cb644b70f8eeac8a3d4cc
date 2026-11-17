@@ -1,0 +1,39 @@
+internal/commands/configure/configure_test.go
+  s_f419e24bfa7567::t_ec57eb056e8dec 1-176
+internal/commands/workspaces/workspaces_test.go
+  s_f0a3efced18120::t_8e5c8a86eafe21 1-66
+cmd/root.go
+  s_f0a3efced18120::t_caaf89450dcd46 17-18,73-76
+cmd/root_test.go
+  s_f0a3efced18120::t_a727b85d9567d3 1-122
+go.mod
+  s_f0a3efced18120::t_4b0300a7536e3a 8
+internal/commands/configure/configure.go
+  s_f0a3efced18120::t_088d497587a2ad 1-140
+internal/commands/workspaces/workspaces.go
+  s_f0a3efced18120::t_8fe761b126ef21 1-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "845fe7cb5680b257f47cb644b70f8eeac8a3d4cc",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    },
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
