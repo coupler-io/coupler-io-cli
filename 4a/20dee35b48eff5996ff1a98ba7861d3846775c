@@ -1,0 +1,38 @@
+internal/commands/datasets/datasets_test.go
+  s_f419e24bfa7567::t_b4d3e1f37dc531 5,173-287
+  s_f0a3efced18120::t_8b4cd44b49ae27 10
+internal/commands/datasets/columns.go
+  s_f419e24bfa7567::t_a8ffe38153fa63 1-97
+internal/commands/datasets/update.go
+  s_f419e24bfa7567::t_486853eeea0d83 1-81
+internal/commands/datasets/create.go
+  s_f419e24bfa7567::t_2b1c7d4e52b770 1-63
+cmd/stdin_test.go
+  s_f0a3efced18120::t_fc64fa4f75fe4e 30-39
+internal/commands/datasets/datasets.go
+  s_f0a3efced18120::t_95d440ad343427 60-61,63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "4a20dee35b48eff5996ff1a98ba7861d3846775c",
+  "prompts": {},
+  "sessions": {
+    "s_f0a3efced18120": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "cc2cb6e3-aa61-4677-b09a-1d6262022522",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": null
+    },
+    "s_f419e24bfa7567": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "12c8724f-825f-401d-9b51-ffa2a9b8e769",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yuriy Stefanyuk <yuriy.stefanyuk@gmail.com>"
+    }
+  }
+}
