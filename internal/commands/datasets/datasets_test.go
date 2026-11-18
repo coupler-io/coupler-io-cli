@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/coupler-io/coupler-io-cli/internal/cmdtest"
+	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/datasets"
 )
 
@@ -225,6 +226,9 @@ func TestUpdateQuerySetsCustomSQLType(t *testing.T) {
 	if err == nil || !strings.Contains(err.Error(), "nothing to update") {
 		t.Fatalf("got %v", err)
 	}
+	if code := cmdutil.ExitCode(err); code != cmdutil.ExitUsage {
+		t.Errorf("exit code = %d, want %d", code, cmdutil.ExitUsage)
+	}
 }
 
 func TestColumnsUpdateSingle(t *testing.T) {
@@ -272,8 +276,11 @@ func TestColumnsUpdateBulkAndValidation(t *testing.T) {
 		"mixed inputs": {"columns", "update", "ds-1", "--key", "a", "--label", "A", "--updates", "[]"},
 		"bad json":     {"columns", "update", "ds-1", "--updates", "{"},
 	} {
-		if err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), args...); err == nil {
+		err := cmdtest.Run(datasets.NewCmdDatasets(env.Factory), args...)
+		if err == nil {
 			t.Errorf("%s: expected error", name)
+		} else if code := cmdutil.ExitCode(err); code != cmdutil.ExitUsage {
+			t.Errorf("%s: exit code = %d, want %d (usage error)", name, code, cmdutil.ExitUsage)
 		}
 	}
 }

@@ -36,9 +36,6 @@ Use --output csv for spreadsheet-friendly results or --output json for the raw r
 			if err != nil {
 				return err
 			}
-			if sql == "" {
-				return cmdutil.UsageErrorf("--statement must not be empty")
-			}
 
 			c, err := f.NewClient()
 			if err != nil {

@@ -41,14 +41,11 @@ func newCmdUpdate(f *cmdutil.Factory) *cobra.Command {
 				if err != nil {
 					return err
 				}
-				if sql == "" {
-					return cmdutil.UsageErrorf("--query must not be empty")
-				}
 				body["type"] = "customSql"
 				body["query"] = sql
 			}
 			if len(body) == 0 {
-				return fmt.Errorf("nothing to update: set --name, --ai-context or --query")
+				return cmdutil.UsageErrorf("nothing to update: set --name, --ai-context or --query")
 			}
 
 			c, err := f.NewClient()

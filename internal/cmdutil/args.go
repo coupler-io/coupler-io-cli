@@ -21,10 +21,15 @@ func RequireFlag(name, value string) error {
 }
 
 // ReadArg resolves a flag value that may point elsewhere: "@path" reads a
-// file and "-" reads stdin. Any other value is returned unchanged.
+// file and "-" reads stdin, which can be read only once per run (see
+// Factory.StdinUsedBy). Any other value is returned unchanged.
 func (f *Factory) ReadArg(value string) (string, error) {
 	switch {
 	case value == "-":
+		if f.StdinUsedBy != "" {
+			return "", UsageErrorf("standard input is already used by %s; pass this value as @file instead", f.StdinUsedBy)
+		}
+		f.StdinUsedBy = "another flag"
 		data, err := io.ReadAll(f.IOStreams.In)
 		if err != nil {
 			return "", fmt.Errorf("read stdin: %w", err)

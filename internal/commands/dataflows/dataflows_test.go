@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/coupler-io/coupler-io-cli/internal/cmdtest"
+	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
 	"github.com/coupler-io/coupler-io-cli/internal/commands/dataflows"
 )
 
@@ -171,15 +172,14 @@ func TestUpdateSendsOnlyEnabledToggle(t *testing.T) {
 	}
 }
 
-func TestUpdateValidation(t *testing.T) {
+// The CLI only checks how a command is used. Whether an interval, day or time
+// is valid is the API's call (see README, "Validation").
+func TestUpdateUsageErrors(t *testing.T) {
 	tests := map[string]struct {
 		args []string
 		want string
 	}{
 		"nothing":        {[]string{"update", "df-1"}, "nothing to update"},
-		"bad interval":   {[]string{"update", "df-1", "--interval", "weekly"}, "--interval must be one of"},
-		"bad week day":   {[]string{"update", "df-1", "--week-day", "7"}, "--week-day must be between"},
-		"bad month day":  {[]string{"update", "df-1", "--month-day", "31"}, "--month-day must be between"},
 		"half hours set": {[]string{"update", "df-1", "--active-hours-start", "9"}, "must be set together"},
 	}
 	for name, tt := range tests {
@@ -189,7 +189,33 @@ func TestUpdateValidation(t *testing.T) {
 			if err == nil || !strings.Contains(err.Error(), tt.want) {
 				t.Fatalf("got %v, want error containing %q", err, tt.want)
 			}
+			if code := cmdutil.ExitCode(err); code != 2 {
+				t.Errorf("exit code = %d, want 2 (usage error)", code)
+			}
 		})
+	}
+}
+
+func TestUpdateLeavesValueValidationToTheAPI(t *testing.T) {
+	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
+		want := map[string]interface{}{"schedule_config": map[string]interface{}{
+			"interval":  "weekly",
+			"week_days": []interface{}{float64(7)},
+			"month_day": float64(31),
+		}}
+		if body := cmdtest.DecodeBody(t, r); !reflect.DeepEqual(body, want) {
+			t.Errorf("values must be forwarded untouched, body = %v", body)
+		}
+		cmdtest.JSON(w, 422, map[string]interface{}{"error": map[string]string{"message": "Unknown interval"}})
+	})
+
+	err := cmdtest.Run(dataflows.NewCmdDataflows(env.Factory), "update", "df-1",
+		"--interval", "weekly", "--week-day", "7", "--month-day", "31")
+	if err == nil || !strings.Contains(err.Error(), "Unknown interval") {
+		t.Fatalf("expected the API message, got %v", err)
+	}
+	if code := cmdutil.ExitCode(err); code != 1 {
+		t.Errorf("exit code = %d, want 1 (runtime error)", code)
 	}
 }
 
@@ -212,7 +238,7 @@ func TestRun(t *testing.T) {
 	}
 }
 
-func TestRunDefaultsToFullAndRejectsBadMode(t *testing.T) {
+func TestRunDefaultsToFull(t *testing.T) {
 	env := cmdtest.Setup(t, func(w http.ResponseWriter, r *http.Request) {
 		if body := cmdtest.DecodeBody(t, r); body["run_mode"] != "full" {
 			t.Errorf("body = %v", body)
@@ -221,11 +247,6 @@ func TestRunDefaultsToFullAndRejectsBadMode(t *testing.T) {
 	})
 	if err := cmdtest.Run(dataflows.NewCmdDataflows(env.Factory), "run", "df-1"); err != nil {
 		t.Fatal(err)
-	}
-
-	err := cmdtest.Run(dataflows.NewCmdDataflows(env.Factory), "run", "df-1", "--mode", "fast")
-	if err == nil || !strings.Contains(err.Error(), "--mode must be full or preview") {
-		t.Fatalf("got %v", err)
 	}
 }
 

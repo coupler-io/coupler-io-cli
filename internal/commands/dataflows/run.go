@@ -22,10 +22,6 @@ func newCmdRun(f *cmdutil.Factory) *cobra.Command {
   coupler dataflows run <id> --mode preview`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if mode != "full" && mode != "preview" {
-				return cmdutil.UsageErrorf("--mode must be full or preview")
-			}
-
 			c, err := f.NewClient()
 			if err != nil {
 				return err

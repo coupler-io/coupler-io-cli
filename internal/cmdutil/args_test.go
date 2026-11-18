@@ -1,6 +1,7 @@
 package cmdutil_test
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"reflect"
@@ -56,6 +57,25 @@ func TestReadArg(t *testing.T) {
 	}
 	if _, err := f.ReadArg("@/does/not/exist"); err == nil {
 		t.Error("expected error for missing file")
+	}
+}
+
+func TestReadArgStdinOnlyOnce(t *testing.T) {
+	f := newFactory("first\n")
+	if got, err := f.ReadArg("-"); err != nil || got != "first" {
+		t.Fatalf("first read = %q, %v", got, err)
+	}
+	_, err := f.ReadArg("-")
+	var usage *cmdutil.UsageError
+	if !errors.As(err, &usage) || !strings.Contains(err.Error(), "already used") {
+		t.Errorf("second read should be a usage error, got %v", err)
+	}
+
+	f = newFactory("token\n")
+	f.StdinUsedBy = "--api-token-stdin"
+	_, err = f.ReadArg("-")
+	if !errors.As(err, &usage) || !strings.Contains(err.Error(), "--api-token-stdin") {
+		t.Errorf("expected usage error naming --api-token-stdin, got %v", err)
 	}
 }
 

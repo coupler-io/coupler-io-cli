@@ -28,6 +28,10 @@ type Factory struct {
 	// config file (configure, completion) still run when it is set.
 	ConfigErr      error
 	ClientOverride *client.Client // for testing
+	// StdinUsedBy names whatever already consumed standard input
+	// (--api-token-stdin or an earlier "-" value). Stdin can be read once, so
+	// a second reader gets a usage error instead of an empty string.
+	StdinUsedBy string
 }
 
 func NewFactory() *Factory {

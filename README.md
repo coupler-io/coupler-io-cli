@@ -74,8 +74,8 @@ coupler dataflows run <id>                    # queue a full run
 | `configure` | Validate a token and save token + workspace |
 | `workspaces list` | List workspaces you can access |
 | `dataflows list \| get \| setup \| create \| update \| run` | Manage dataflows. `update` renames and sets the schedule; `run --mode full\|preview` queues a run |
-| `sources create \| update` | Add or change a dataflow source (params, credential, enabled, paused) |
-| `destinations create \| update` | Add or change a dataflow destination |
+| `sources create \| update` | Add or change a dataflow source (params, credential, `--enabled`, `--lifecycle-state`) |
+| `destinations create \| update` | Add or change a dataflow destination (params, credential, `--lifecycle-state`; there is no `--enabled`, use `--lifecycle-state disabled`) |
 | `datasets list \| get \| create \| update \| query` | Browse datasets, add custom SQL datasets, run DuckDB SQL on the latest data |
 | `datasets columns update` | Set column labels and descriptions |
 | `datasets snapshots list \| get` | Datasets with data from the latest successful run |
@@ -109,6 +109,16 @@ coupler dataflows run <id>
 - `--params '{"limit": 10, "tags": ["a"]}'` sends typed JSON. Use `@file.json` to read a file or `-` for stdin.
 - When both are given, `--param` wins for the same key.
 
+### Reading values from files and stdin
+
+Flags documented as "`@file` or `-`" (`--params`, `--statement`, `--query`, `--ai-context`, `--updates`) read the value from a file (`@path`) or from standard input (`-`).
+
+Standard input can be read **once** per run. `--api-token-stdin` counts as a read, so it cannot be combined with a `-` value, and two `-` values in one command cannot both work. Both cases fail with a usage error (exit code `2`) that says so. Pass the other value as `@file` instead:
+
+```bash
+echo "$COUPLER_TOKEN" | coupler datasets query <id> -s @report.sql --api-token-stdin
+```
+
 ### Output formats
 
 - `table` / `text` are for humans. Wide values are shortened in tables.
@@ -123,18 +133,35 @@ Errors go to stderr (`Error: ...`); results go to stdout.
 |------|---------|
 | `0` | Success |
 | `1` | Runtime error: API error, network failure, unreadable or invalid config |
-| `2` | Usage error: unknown command or flag, wrong arguments, missing required flag, invalid `--output`, bad `--param`/`--params` |
+| `2` | Usage error, see [Validation](#validation): unknown command or flag, wrong arguments, missing required flag, flags used together wrongly, nothing to update, invalid `--output`, malformed `--param`/`--params`, stdin used twice |
 | `128+N` | Interrupted by signal N (`130` for Ctrl-C, `143` for SIGTERM) |
 
 An unknown subcommand of a group (for example `coupler dataflows nope`) is a usage error with a suggestion, not a silent help screen. Running a group with no arguments prints its help and exits `0`.
 
 API rate limit: 100 requests per minute per organization (HTTP 429).
 
+### Validation
+
+Two places can reject a command, and each has one job. The rule: **the CLI checks how a command is used; the API checks the values.**
+
+| | Checked by the CLI (exit `2`, no request is sent) | Checked by the API (exit `1`, the API's message is printed as is) |
+|---|---|---|
+| Examples | A required flag or argument is missing. Flags that must be used together or not together (`--active-hours-start` with `--active-hours-end`, `--updates` with `--key`). An update with no fields to change. Syntax the CLI has to parse itself: `--param key=value`, `--params` JSON, `@file`, `--output` format. Standard input used twice. | Allowed values and ranges (`--interval`, `--week-day`, `--month-day`, `--lifecycle-state`, `--mode`, `--type`), time and timezone formats, empty values, whether an id exists, credential access, plan limits (for example pausing), and anything that depends on the integration. |
+
+Why this split:
+
+- The API is the single source of truth. Enum lists and ranges copied into the CLI go stale when the API changes, and then the CLI rejects values the API accepts.
+- Usage checks need no network round trip and do not depend on server state, so they are cheap, stable, and the CLI has to do them anyway to build a well-formed request. Some of them are the only protection: the API treats an update with nothing to change as a successful no-op.
+
+When adding a command, follow the rule: send values through untouched and let the API answer. Do not add enum or range checks to the CLI. If a flag's allowed values help users, list them in the flag's help text.
+
+Because `--enabled` is not read by the destinations API, it exists only on `sources update`.
+
 ## Development
 
 ```bash
 make build     # ./coupler
-make test      # go test -race ./...
+make test      # go test -race ./... (CI and the release workflow run exactly this)
 make lint      # gofmt + go vet
 ```
 
@@ -148,10 +175,11 @@ internal/config              flags/env/~/.coupler.yaml resolution
 internal/cmdutil             Factory, path building, param parsing, shared printing
 internal/output              table, text, json, csv formatters
 internal/commands/<name>     one package per command group
+internal/commands/dataflowparts   shared create/update commands behind sources and destinations
 internal/cmdtest             fake API server helpers for tests
 ```
 
-To add a command: create a package under `internal/commands/`, build it from `*cmdutil.Factory`, register it in `cmd/root.go`, and test it with `cmdtest.Setup`.
+To add a command: create a package under `internal/commands/`, build it from `*cmdutil.Factory`, register it in `cmd/root.go`, and test it with `cmdtest.Setup`. Every command package has its own `_test.go`; put behaviour that only makes sense across commands (global flags, exit codes) in `cmd/`. Report usage mistakes with `cmdutil.UsageErrorf` (exit code 2), never with a plain `fmt.Errorf`.
 
 Release: push a tag like `v0.1.0`; GitHub Actions runs GoReleaser.
 
