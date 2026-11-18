@@ -14,6 +14,16 @@ import (
 
 	"github.com/coupler-io/coupler-io-cli/internal/client"
 	"github.com/coupler-io/coupler-io-cli/internal/cmdutil"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/configure"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/credentials"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/dataflows"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/datasets"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/destinations"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/integrations"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/skills"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/sources"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/templates"
+	"github.com/coupler-io/coupler-io-cli/internal/commands/workspaces"
 	"github.com/coupler-io/coupler-io-cli/internal/config"
 	"github.com/coupler-io/coupler-io-cli/internal/output"
 )
@@ -68,6 +78,24 @@ Get started:
 		return names, cobra.ShellCompDirectiveNoFileComp
 	})
 
+	// Setup
+	cmd.AddCommand(configure.NewCmdConfigure(f))
+	cmd.AddCommand(workspaces.NewCmdWorkspaces(f))
+
+	// Dataflows
+	cmd.AddCommand(dataflows.NewCmdDataflows(f))
+	cmd.AddCommand(sources.NewCmdSources(f))
+	cmd.AddCommand(destinations.NewCmdDestinations(f))
+
+	// Data
+	cmd.AddCommand(datasets.NewCmdDatasets(f))
+
+	// Discovery
+	cmd.AddCommand(integrations.NewCmdIntegrations(f))
+	cmd.AddCommand(credentials.NewCmdCredentials(f))
+	cmd.AddCommand(templates.NewCmdTemplates(f))
+	cmd.AddCommand(skills.NewCmdSkills(f))
+
 	cmd.AddCommand(newCompletionCmd())
 
 	finalizeTree(cmd)
@@ -84,6 +112,10 @@ func readTokenFromStdin(cmd *cobra.Command, f *cmdutil.Factory) error {
 	if flag := cmd.Flag("api-token"); flag != nil && flag.Changed {
 		return cmdutil.UsageErrorf("--api-token and --api-token-stdin are mutually exclusive")
 	}
+	if f.StdinUsedBy != "" {
+		return cmdutil.UsageErrorf("standard input is already used by %s", f.StdinUsedBy)
+	}
+	f.StdinUsedBy = "--api-token-stdin"
 	data, err := io.ReadAll(f.IOStreams.In)
 	if err != nil {
 		return fmt.Errorf("read API token from stdin: %w", err)
