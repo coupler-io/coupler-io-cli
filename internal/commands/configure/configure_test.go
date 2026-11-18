@@ -25,12 +25,12 @@ func workspacesHandler(t *testing.T, workspaces ...map[string]interface{}) http.
 	}
 }
 
-// useTempHome points ~/.coupler.yaml at a temp dir and returns its path.
+// useTempHome points ~/.coupler-io.yaml at a temp dir and returns its path.
 func useTempHome(t *testing.T) string {
 	t.Helper()
 	home := t.TempDir()
 	t.Setenv("HOME", home)
-	return filepath.Join(home, ".coupler.yaml")
+	return filepath.Join(home, ".coupler-io.yaml")
 }
 
 func TestConfigureSingleWorkspace(t *testing.T) {

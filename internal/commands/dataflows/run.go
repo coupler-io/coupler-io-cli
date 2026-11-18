@@ -17,9 +17,9 @@ func newCmdRun(f *cmdutil.Factory) *cobra.Command {
 		Short: "Run a dataflow now",
 		Long: "Queues a run and returns immediately. A full run imports the data; a preview run only " +
 			"fetches a sample. A dataflow that is not fully configured is rejected with the missing setup; " +
-			"check it with `coupler dataflows setup <id>`.",
-		Example: `  coupler dataflows run <id>
-  coupler dataflows run <id> --mode preview`,
+			"check it with `coupler-io dataflows setup <id>`.",
+		Example: `  coupler-io dataflows run <id>
+  coupler-io dataflows run <id> --mode preview`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := f.NewClient()

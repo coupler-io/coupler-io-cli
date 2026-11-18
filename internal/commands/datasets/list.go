@@ -17,8 +17,8 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
 		Short: "List datasets in the workspace",
 		Long: "Lists datasets with their state. Only datasets with QUERYABLE=true can be used with " +
 			"`datasets query`. Use --output json to see the state legend.",
-		Example: `  coupler datasets list --dataflow-id <id>
-  coupler datasets list --source gsheet --query sales`,
+		Example: `  coupler-io datasets list --dataflow-id <id>
+  coupler-io datasets list --source gsheet --query sales`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := f.NewClient()

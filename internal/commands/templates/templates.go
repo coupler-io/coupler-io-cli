@@ -31,7 +31,7 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
 	return &cobra.Command{
 		Use:   "list",
 		Short: "List templates",
-		Long:  "Lists available templates. Pass an id to `coupler dataflows create --template-id` to copy one.",
+		Long:  "Lists available templates. Pass an id to `coupler-io dataflows create --template-id` to copy one.",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := f.NewClient()

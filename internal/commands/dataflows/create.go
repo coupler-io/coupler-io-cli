@@ -14,8 +14,8 @@ func newCmdCreate(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create",
 		Short: "Create a dataflow, empty or from a template",
-		Example: `  coupler dataflows create --name "Sales report"
-  coupler dataflows create --template-id <id>   # ids from: coupler templates list`,
+		Example: `  coupler-io dataflows create --name "Sales report"
+  coupler-io dataflows create --template-id <id>   # ids from: coupler-io templates list`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if name == "" && templateID == "" {
@@ -48,6 +48,6 @@ func newCmdCreate(f *cmdutil.Factory) *cobra.Command {
 	}
 
 	cmd.Flags().StringVar(&name, "name", "", "Dataflow name (required unless --template-id is set)")
-	cmd.Flags().StringVar(&templateID, "template-id", "", "Copy this template (see `coupler templates list`)")
+	cmd.Flags().StringVar(&templateID, "template-id", "", "Copy this template (see `coupler-io templates list`)")
 	return cmd
 }

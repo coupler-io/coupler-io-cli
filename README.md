@@ -9,14 +9,14 @@ It wraps the Coupler.io public API (`https://api.coupler.io`, [reference](https:
 From source (needs Go 1.24+):
 
 ```bash
-go install github.com/coupler-io/coupler-io-cli@latest   # installs a binary named coupler-io-cli
+go install github.com/coupler-io/coupler-io-cli@latest   # note: Go names this binary coupler-io-cli, rename or alias it to coupler-io
 # or
-git clone git@github.com:coupler-io/coupler-io-cli.git && cd coupler-io-cli && make build   # ./coupler
+git clone git@github.com:coupler-io/coupler-io-cli.git && cd coupler-io-cli && make build   # ./coupler-io
 ```
 
-Tagged releases publish `coupler` binaries for Linux, macOS and Windows (amd64/arm64) on the GitHub releases page.
+Tagged releases publish `coupler-io` binaries for Linux, macOS and Windows (amd64/arm64) on the GitHub releases page.
 
-Shell completion: `coupler completion zsh|bash|fish|powershell`.
+Shell completion: `coupler-io completion zsh|bash|fish|powershell`.
 
 ## Authenticate
 
@@ -24,10 +24,10 @@ Shell completion: `coupler completion zsh|bash|fish|powershell`.
 2. Run:
 
 ```bash
-echo "$COUPLER_TOKEN" | coupler configure --api-token-stdin --workspace-id 42
+echo "$COUPLER_IO_TOKEN" | coupler-io configure --api-token-stdin --workspace-id 42
 ```
 
-This validates the token, picks a workspace (the one from `--workspace-id`, or an interactive choice when the token has several), and saves both to `~/.coupler.yaml` with `0600` permissions.
+This validates the token, picks a workspace (the one from `--workspace-id`, or an interactive choice when the token has several), and saves both to `~/.coupler-io.yaml` with `0600` permissions.
 
 `--api-token-stdin` keeps the token out of your shell history and the process list. Because it consumes stdin, pass `--workspace-id` together with it, otherwise the workspace prompt has nothing to read and the command asks you to pass the id. `--api-token <token>` also works, but the value is visible in `ps` and shell history; avoid it on shared machines. The two flags are mutually exclusive.
 
@@ -35,29 +35,29 @@ Settings are resolved in this order: flag, environment variable, config file.
 
 | Flag | Env var | Config key | Purpose |
 |------|---------|------------|---------|
-| `--api-token` | `COUPLER_API_TOKEN` | `api-token` | Personal API token |
+| `--api-token` | `COUPLER_IO_API_TOKEN` | `api-token` | Personal API token |
 | `--api-token-stdin` | | | Read the token from standard input |
-| `-w`, `--workspace-id` | `COUPLER_WORKSPACE_ID` | `workspace-id` | Workspace used by workspace-scoped commands |
-| `--api-url` | `COUPLER_API_URL` | `api-url` | API host (default `https://api.coupler.io`) |
-| `-o`, `--output` | `COUPLER_OUTPUT` | | `table` (default), `json`, `text`, `csv` |
+| `-w`, `--workspace-id` | `COUPLER_IO_WORKSPACE_ID` | `workspace-id` | Workspace used by workspace-scoped commands |
+| `--api-url` | `COUPLER_IO_API_URL` | `api-url` | API host (default `https://api.coupler.io`) |
+| `-o`, `--output` | `COUPLER_IO_OUTPUT` | | `table` (default), `json`, `text`, `csv` |
 
-In CI, skip `configure` and set `COUPLER_API_TOKEN` and `COUPLER_WORKSPACE_ID`, or pipe the token with `--api-token-stdin`.
+In CI, skip `configure` and set `COUPLER_IO_API_TOKEN` and `COUPLER_IO_WORKSPACE_ID`, or pipe the token with `--api-token-stdin`.
 
 ### Config file
 
-Only `~/.coupler.yaml` is read. A `.coupler.yaml` in the current directory is deliberately ignored, so a cloned repository cannot redirect `api-url` and capture your token.
+Only `~/.coupler-io.yaml` is read. A `.coupler-io.yaml` in the current directory is deliberately ignored, so a cloned repository cannot redirect `api-url` and capture your token.
 
-A missing file is fine. A file that exists but cannot be read or parsed makes commands fail with an error instead of silently dropping the saved token. `configure` and `completion` still run in that case, so `coupler configure` is how you overwrite a broken file.
+A missing file is fine. A file that exists but cannot be read or parsed makes commands fail with an error instead of silently dropping the saved token. `configure` and `completion` still run in that case, so `coupler-io configure` is how you overwrite a broken file.
 
 ## Quick start
 
 ```bash
-coupler workspaces list                       # find workspace ids
-coupler dataflows list
-coupler datasets list --dataflow-id <id>
-coupler datasets get <dataset-id>             # columns and their DB names
-coupler datasets query <dataset-id> -s 'select country, sum(revenue) from data group by 1' -o csv
-coupler dataflows run <id>                    # queue a full run
+coupler-io workspaces list                       # find workspace ids
+coupler-io dataflows list
+coupler-io datasets list --dataflow-id <id>
+coupler-io datasets get <dataset-id>             # columns and their DB names
+coupler-io datasets query <dataset-id> -s 'select country, sum(revenue) from data group by 1' -o csv
+coupler-io dataflows run <id>                    # queue a full run
 ```
 
 ## Commands
@@ -78,22 +78,22 @@ coupler dataflows run <id>                    # queue a full run
 | `templates list` | Dataflow templates (use with `dataflows create --template-id`) |
 | `skills list \| prompt` | Agent skills |
 
-Run `coupler <command> --help` for flags and examples.
+Run `coupler-io <command> --help` for flags and examples.
 
 ### Building a dataflow from scratch
 
 ```bash
-coupler integrations sources list
-coupler integrations sources get csv                      # which params does it take?
-coupler credentials list --type destination
+coupler-io integrations sources list
+coupler-io integrations sources get csv                      # which params does it take?
+coupler-io credentials list --type destination
 
-coupler dataflows create --name "Sales report"            # prints the new id
-coupler sources create --dataflow-id <id> --integration csv --param url=https://example.com/data.csv
-coupler destinations create --dataflow-id <id> --integration google_spreadsheet \
+coupler-io dataflows create --name "Sales report"            # prints the new id
+coupler-io sources create --dataflow-id <id> --integration csv --param url=https://example.com/data.csv
+coupler-io destinations create --dataflow-id <id> --integration google_spreadsheet \
     --credential-id 15 --param sheet_name=Sales
-coupler dataflows update <id> --interval daily --at 08:00 --timezone Europe/Berlin
-coupler dataflows setup <id>                              # anything still missing?
-coupler dataflows run <id>
+coupler-io dataflows update <id> --interval daily --at 08:00 --timezone Europe/Berlin
+coupler-io dataflows setup <id>                              # anything still missing?
+coupler-io dataflows run <id>
 ```
 
 ### Passing params
@@ -109,7 +109,7 @@ Flags documented as "`@file` or `-`" (`--params`, `--statement`, `--query`, `--a
 Standard input can be read **once** per run. `--api-token-stdin` counts as a read, so it cannot be combined with a `-` value, and two `-` values in one command cannot both work. Both cases fail with a usage error (exit code `2`) that says so. Pass the other value as `@file` instead:
 
 ```bash
-echo "$COUPLER_TOKEN" | coupler datasets query <id> -s @report.sql --api-token-stdin
+echo "$COUPLER_IO_TOKEN" | coupler-io datasets query <id> -s @report.sql --api-token-stdin
 ```
 
 ### Output formats
@@ -129,7 +129,7 @@ Errors go to stderr (`Error: ...`); results go to stdout.
 | `2` | Usage error, see [Validation](#validation): unknown command or flag, wrong arguments, missing required flag, flags used together wrongly, nothing to update, invalid `--output`, malformed `--param`/`--params`, stdin used twice |
 | `128+N` | Interrupted by signal N (`130` for Ctrl-C, `143` for SIGTERM) |
 
-An unknown subcommand of a group (for example `coupler dataflows nope`) is a usage error with a suggestion, not a silent help screen. Running a group with no arguments prints its help and exits `0`.
+An unknown subcommand of a group (for example `coupler-io dataflows nope`) is a usage error with a suggestion, not a silent help screen. Running a group with no arguments prints its help and exits `0`.
 
 API rate limit: 100 requests per minute per organization (HTTP 429).
 
@@ -153,7 +153,7 @@ Because `--enabled` is not read by the destinations API, it exists only on `sour
 ## Development
 
 ```bash
-make build     # ./coupler
+make build     # ./coupler-io
 make test      # go test -race ./... (CI and the release workflow run exactly this)
 make lint      # gofmt + go vet
 ```
@@ -164,7 +164,7 @@ Layout follows [mailtrap-cli](https://github.com/mailtrap/mailtrap-cli):
 main.go                      entry point, version injected by GoReleaser
 cmd/root.go                  root command, global flags, command registration
 internal/client              HTTP client and APIError
-internal/config              flags/env/~/.coupler.yaml resolution
+internal/config              flags/env/~/.coupler-io.yaml resolution
 internal/cmdutil             Factory, path building, param parsing, shared printing
 internal/output              table, text, json, csv formatters
 internal/commands/<name>     one package per command group

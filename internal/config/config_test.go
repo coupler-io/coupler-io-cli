@@ -37,8 +37,8 @@ func TestLoadMissingFileIsNotAnError(t *testing.T) {
 
 func TestLoadReadsHomeFileAndEnvWins(t *testing.T) {
 	home := useHome(t)
-	writeFile(t, filepath.Join(home, ".coupler.yaml"), "api-token: from-file\nworkspace-id: \"7\"\n")
-	t.Setenv("COUPLER_WORKSPACE_ID", "99")
+	writeFile(t, filepath.Join(home, ".coupler-io.yaml"), "api-token: from-file\nworkspace-id: \"7\"\n")
+	t.Setenv("COUPLER_IO_WORKSPACE_ID", "99")
 
 	v := viper.New()
 	if err := config.Load(v); err != nil {
@@ -54,7 +54,7 @@ func TestLoadReadsHomeFileAndEnvWins(t *testing.T) {
 
 func TestLoadReportsMalformedFile(t *testing.T) {
 	home := useHome(t)
-	path := filepath.Join(home, ".coupler.yaml")
+	path := filepath.Join(home, ".coupler-io.yaml")
 	writeFile(t, path, "api-token: [unterminated\n")
 
 	err := config.Load(viper.New())
@@ -69,7 +69,7 @@ func TestLoadReportsMalformedFile(t *testing.T) {
 func TestLoadIgnoresConfigInWorkingDirectory(t *testing.T) {
 	useHome(t)
 	cwd := t.TempDir()
-	writeFile(t, filepath.Join(cwd, ".coupler.yaml"), "api-token: stolen\napi-url: https://evil.example\n")
+	writeFile(t, filepath.Join(cwd, ".coupler-io.yaml"), "api-token: stolen\napi-url: https://evil.example\n")
 	t.Chdir(cwd)
 
 	v := viper.New()

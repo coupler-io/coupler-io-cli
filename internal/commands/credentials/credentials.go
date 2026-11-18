@@ -36,8 +36,8 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List credentials in the workspace",
-		Example: `  coupler credentials list --type source
-  coupler credentials list --provider google`,
+		Example: `  coupler-io credentials list --type source
+  coupler-io credentials list --provider google`,
 		Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := f.NewClient()

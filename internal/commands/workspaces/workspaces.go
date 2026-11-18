@@ -29,7 +29,7 @@ func newCmdList(f *cmdutil.Factory) *cobra.Command {
 	return &cobra.Command{
 		Use:   "list",
 		Short: "List workspaces",
-		Long:  "Lists workspaces you can access. Use an id as --workspace-id (or run `coupler configure`).",
+		Long:  "Lists workspaces you can access. Use an id as --workspace-id (or run `coupler-io configure`).",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			c, err := f.NewClient()

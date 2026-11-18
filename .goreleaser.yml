@@ -16,7 +16,7 @@ builds:
       - arm64
     ldflags:
       - -s -w -X main.version={{.Version}} -X main.commit={{.ShortCommit}} -X main.date={{.Date}}
-    binary: coupler
+    binary: coupler-io
 
 archives:
   - formats: [tar.gz]

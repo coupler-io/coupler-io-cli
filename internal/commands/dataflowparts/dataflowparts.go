@@ -109,7 +109,7 @@ func newCmdCreate(f *cmdutil.Factory, spec Spec) *cobra.Command {
 	flags := cmd.Flags()
 	flags.StringVar(&dataflowID, "dataflow-id", "", fmt.Sprintf("Dataflow to add the %s to (required)", spec.Noun))
 	flags.StringVar(&integration, "integration", "", fmt.Sprintf("%s integration key, e.g. %s (required)", capitalize(spec.Noun), spec.IntegrationExample))
-	flags.IntVar(&credentialID, "credential-id", 0, "Credential to connect (see `coupler credentials list`)")
+	flags.IntVar(&credentialID, "credential-id", 0, "Credential to connect (see `coupler-io credentials list`)")
 	addParamFlags(cmd, &params, &paramsJSON)
 	return cmd
 }

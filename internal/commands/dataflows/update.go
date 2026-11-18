@@ -34,10 +34,10 @@ Schedule fields by interval:
   monthly                  --month-day 1..28
 
 --schedule-enabled=false pauses the schedule; --schedule-enabled=true resumes the previous one.`,
-		Example: `  coupler dataflows update <id> --name "Weekly sales"
-  coupler dataflows update <id> --interval daily --at 08:00 --timezone Europe/Berlin
-  coupler dataflows update <id> --interval hourly --week-day 0 --week-day 1 --active-hours-start 9 --active-hours-end 18
-  coupler dataflows update <id> --schedule-enabled=false`,
+		Example: `  coupler-io dataflows update <id> --name "Weekly sales"
+  coupler-io dataflows update <id> --interval daily --at 08:00 --timezone Europe/Berlin
+  coupler-io dataflows update <id> --interval hourly --week-day 0 --week-day 1 --active-hours-start 9 --active-hours-end 18
+  coupler-io dataflows update <id> --schedule-enabled=false`,
 		Args: cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			flags := cmd.Flags()
